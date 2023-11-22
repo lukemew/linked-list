@@ -62,6 +62,26 @@ function linkedList(){
         return null
     }
 
+    const remove = (node) => {
+        if(length === 0){
+            return false
+        }
+
+        // remove o primeiro elemento
+        if(node === head){
+            head = node.next
+            return true
+        }
+
+        // remove os demais elementos
+        let currentNode = head
+        if(currentNode.next && currentNode.next !== node){
+            currentNode = currentNode.next
+        }
+        currentNode.next = node.next
+        return true
+    }
+
     return{
         // ============== FUNÇÕES ================
 
@@ -74,13 +94,25 @@ function linkedList(){
         // procura algum elemento da lista através do índice
         getByIndex: (index) => getByIndex(index),
         // procura algum elemento da lista através do valor
-        getByValue: (value) => getByValue(value)
+        getByValue: (value) => getByValue(value),
+        // remover algum elemento da lista
+        remove: (node) => remove(node)
     }
      
 }
 
+// inicia a lista
 const list = linkedList()
+// adiciona elementos
 list.add(7)
 list.add(8)
 list.add(9)
-console.log(list.getByValue(2))
+list.add(10)
+// percorre a lista e atribui à variável node que será utilizada para remover o item
+let node = list.getByValue(9)
+// antes de remover
+list.print()
+// remove o elemento supracitado (9)
+list.remove(node)
+// após ser removido
+list.print()
